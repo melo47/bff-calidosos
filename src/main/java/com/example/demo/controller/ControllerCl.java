@@ -8,9 +8,12 @@
  */
 package com.example.demo.controller;
 
-import com.example.demo.models.dto.Request;
-import com.example.demo.models.dto.Response;
-import com.example.demo.services.UserService;
+import com.example.demo.models.dto.request.login.LoginRequest;
+import com.example.demo.models.dto.request.product.UserProductsRequest;
+import com.example.demo.models.dto.response.login.LoginResponse;
+import com.example.demo.models.dto.response.product.UserProductResponse;
+import com.example.demo.services.LoginService;
+import com.example.demo.services.UserProductsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,16 +28,22 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class ControllerCl {
 
-    private final UserService userService;
+    private final LoginService loginService;
+    private final UserProductsService userProductsService;
 
     @PostMapping("login")
-    public ResponseEntity<Response> validateUser(@RequestBody Request rq){
-        return ResponseEntity.ok(userService.validateUser(rq.getName(), rq.getPassword()));
+    public ResponseEntity<LoginResponse> validateUser(@RequestBody LoginRequest rq){
+        return ResponseEntity.ok(loginService.validateUser(rq.getName(), rq.getPassword()));
     }
 
     @PostMapping("users")
-    public ResponseEntity<Object> getAllUsers(@RequestBody Request rq) {
-        return ResponseEntity.ok(userService.getUsers(rq.getName(), rq.getPassword()));
+    public ResponseEntity<Object> getAllUsers(@RequestBody LoginRequest rq) {
+        return ResponseEntity.ok(loginService.getUsers(rq.getName(), rq.getPassword()));
+    }
+
+    @PostMapping("products")
+    public ResponseEntity<UserProductResponse> validateUser(@RequestBody UserProductsRequest rq){
+        return ResponseEntity.ok(userProductsService.getProductsByUsername(rq.getName()));
     }
 
 }

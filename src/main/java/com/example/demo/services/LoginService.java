@@ -10,8 +10,8 @@ package com.example.demo.services;
 
 import com.example.demo.constants.ErrorMessageConstants;
 import com.example.demo.constants.ServiceConstants;
-import com.example.demo.models.dto.Response;
-import com.example.demo.models.dto.User;
+import com.example.demo.models.dto.response.login.LoginResponse;
+import com.example.demo.models.entity.User;
 import com.example.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -24,16 +24,16 @@ import java.util.List;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class UserService {
+public class LoginService {
 
     private final UserRepository userRepository;
 
     @SneakyThrows
-    public Response validateUser(final String username, final String password) {
+    public LoginResponse validateUser(final String username, final String password) {
         var list = userRepository.getUser(username);
 
         if(isInjectionDone()) {
-            return Response.builder().message(ServiceConstants.CAPTURED_FLAG).build();
+            return LoginResponse.builder().message(ServiceConstants.CAPTURED_FLAG).build();
         }
 
         if(list.isEmpty()) {
@@ -44,7 +44,7 @@ public class UserService {
             throw new RuntimeException(ErrorMessageConstants.USER_PASSWORD_INVALID);
         }
 
-        return Response.builder().message(ServiceConstants.AUTHENTICATED_USER).build();
+        return LoginResponse.builder().message(ServiceConstants.AUTHENTICATED_USER).build();
     }
 
     @SneakyThrows

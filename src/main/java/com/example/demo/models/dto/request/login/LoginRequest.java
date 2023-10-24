@@ -6,17 +6,14 @@
  * <p>NOTICE: This file is subject to the terms and conditions defined in file 'LICENSE', which is
  * part of this source code package.
  */
-package com.example.demo.models.dto;
+package com.example.demo.models.dto.request.login;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class User {
-    private String username;
+public class LoginRequest {
+    private String name;
     private String password;
-    private String role;
 }

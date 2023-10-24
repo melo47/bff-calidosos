@@ -9,7 +9,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.constants.ErrorMessageConstants;
-import com.example.demo.models.dto.User;
+import com.example.demo.models.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
@@ -17,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Repository
 @AllArgsConstructor
