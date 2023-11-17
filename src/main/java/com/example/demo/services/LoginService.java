@@ -17,8 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.List;
 
 @Service
@@ -40,10 +38,6 @@ public class LoginService {
             throw new RuntimeException(ErrorMessageConstants.USER_PASSWORD_INVALID);
         }
 
-        if(!list.get(0).getPassword().equals(password)) {
-            throw new RuntimeException(ErrorMessageConstants.USER_PASSWORD_INVALID);
-        }
-
         return LoginResponse.builder().message(ServiceConstants.AUTHENTICATED_USER).build();
     }
 
@@ -56,13 +50,7 @@ public class LoginService {
 
     @SneakyThrows
     private boolean isInjectionDone() {
-        List<User> users = userRepository.getAllUsers();
-        try(BufferedReader  bf = new BufferedReader(new FileReader(ServiceConstants.DATA_RECORD_FILE_SQL))) {
-            long recordsInFile = bf.lines().count();
-            long usersInDatabase = users.size();
-            log.info("Records File {}", recordsInFile);
-            log.info("records DB {} ", usersInDatabase);
-            return recordsInFile > usersInDatabase;
-        }
+        return userRepository.getAllUsers().isEmpty();
+
     }
 }
