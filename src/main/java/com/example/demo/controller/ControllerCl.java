@@ -8,6 +8,7 @@
  */
 package com.example.demo.controller;
 
+import com.example.demo.constants.ServiceConstants;
 import com.example.demo.models.dto.request.login.LoginRequest;
 import com.example.demo.models.dto.request.product.UserProductsRequest;
 import com.example.demo.models.dto.response.login.LoginResponse;
@@ -15,7 +16,9 @@ import com.example.demo.models.dto.response.product.UserProductResponse;
 import com.example.demo.services.LoginService;
 import com.example.demo.services.UserProductsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,4 +49,9 @@ public class ControllerCl {
         return ResponseEntity.ok(userProductsService.getProductsByUsername(rq.getName()));
     }
 
+    @PostMapping("validate-otp")
+    public ResponseEntity<String> validateOtp(){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .body(ServiceConstants.EMPTY_RESPONSE);
+    }
 }

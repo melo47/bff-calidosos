@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceConstants {
+    public static final String EMPTY_RESPONSE = "";
     public static final String CAPTURED_FLAG = "captured";
     public static final String AUTHENTICATED_USER = "authenticated";
     public static final String DATA_RECORD_FILE_SQL = "./src/main/resources/data.sql";
